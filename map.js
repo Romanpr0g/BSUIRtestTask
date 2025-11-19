@@ -265,7 +265,7 @@ function ensureSvgGlowDefs(svg, okHex, badHex) {
 }
 
 // ====== Panzoom ======
-const pz = Panzoom(pzInner, { maxScale: 6, minScale: 0.5, contain: "outside" });
+const pz = Panzoom(pzInner, { maxScale: 6, minScale: 0.5});
 pzInner.parentElement.addEventListener("wheel", pz.zoomWithWheel, {
   passive: false,
 });
@@ -414,6 +414,7 @@ function applyJsonDataClient(d, { setImage = true } = {}) {
     mapStage.appendChild(svg);
 
     const colorNames = [...new Set(arr.map((a) => a.color).filter(Boolean))];
+    console.log(colorNames)
     rightPalette.splice(
       0,
       rightPalette.length,
