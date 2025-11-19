@@ -11,6 +11,8 @@ const palette = [
   { name: "brown", hex: "#795548" },
   { name: "black", hex: "#212121" },
 ];
+
+const rightPalette = [];
 let chosen = palette[0];
 
 // ====== DOM ======
@@ -46,9 +48,9 @@ function selectPaletteByName(name) {
   });
 }
 
-function buildPalette() {
+function buildPalette(colors = []) {
   paletteEl.innerHTML = "";
-  for (const c of palette) {
+  for (const c of colors) {
     const sw = document.createElement("div");
     sw.className = "sw" + (c === chosen ? " selected" : "");
     sw.dataset.name = c.name;
@@ -411,6 +413,16 @@ function applyJsonDataClient(d, { setImage = true } = {}) {
     });
     mapStage.appendChild(svg);
 
+    const colorNames = [...new Set(arr.map((a) => a.color).filter(Boolean))];
+    rightPalette.splice(
+      0,
+      rightPalette.length,
+      ...colorNames
+        .map((name) => palette.find((c) => c.name === name))
+        .filter(Boolean)
+    );
+    buildPalette(rightPalette);
+
     for (const o of arr) {
       if (!Array.isArray(o.coords) || o.coords.length < 3) continue;
       const pts = o.coords.map((p) => `${p[0]},${p[1]}`).join(" ");
@@ -459,7 +471,7 @@ async function loadAreasFromJson(path = "./areas.json") {
   }
 }
 
-buildPalette();
+// buildPalette();
 btnCheck.addEventListener("click", checkAll);
 
 loadAreasFromJson();
