@@ -170,6 +170,7 @@ function checkAll() {
         ensureSvgGlowDefs(svg, okColor, badColor);
         a.el.setAttribute("filter", ok ? "url(#glow-ok)" : "url(#glow-bad)");
         a.el.setAttribute("data-mark", ok ? "correct" : "wrong");
+        a.el.removeAttribute("stroke");
       }
     }
   }
@@ -339,7 +340,7 @@ function applyJsonDataClient(d, { setImage = true } = {}) {
   mapStage.style.width = W + "px";
   mapStage.style.height = H + "px";
 
-  // фон-картинка (необязательно)
+  // // фон-картинка (необязательно)
   if (setImage && d?.image?.dataURL) {
     mapStage.style.backgroundImage = `url(${d.image.dataURL})`;
     mapStage.style.backgroundSize = "contain";
@@ -445,10 +446,20 @@ function applyJsonDataClient(d, { setImage = true } = {}) {
 }
 
 // Экспортируем функцию в глобальную область — можно вызывать из консоли
-window.applyJsonDataClient = applyJsonDataClient;
+// window.applyJsonDataClient = applyJsonDataClient;
 
-// ====== Init ======
+async function loadAreasFromJson(path = "./areas.json") {
+  try {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error(`Не удалось загрузить ${path}: ${res.status}`);
+    const data = await res.json();
+    applyJsonDataClient(data);
+  } catch (err) {
+    console.error("Ошибка загрузки областей:", err);
+  }
+}
+
 buildPalette();
 btnCheck.addEventListener("click", checkAll);
-// стартуем со встроенной конфигурацией
-applyJsonDataClient(config);
+
+loadAreasFromJson();

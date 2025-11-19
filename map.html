@@ -1,60 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Клиентская раскраска контурной карты</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="layout">
-      <div class="map-col">
-        <div class="pz-outer">
-          <div class="pz-inner" id="pzInner">
-            <div id="mapStage" class="map-stage">
-              <div class="backgrid" aria-hidden="true"></div>
-            </div>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Клиентская раскраска контурной карты</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="layout">
+    <div class="map-col">
+      <div class="pz-outer">
+        <div class="pz-inner" id="pzInner">
+          <div id="mapStage" class="map-stage">
+            <div class="backgrid" aria-hidden="true"></div>
           </div>
         </div>
       </div>
-
-      <aside class="side">
-        <div class="panel">
-          <h3 style="margin: 0 0 6px">Раскраска карты</h3>
-          <div class="status">
-            Выбранный цвет: <span id="curColorName">white</span> · Выделено:
-            <span id="selCount">0</span>
-          </div>
-          <div class="row">
-            <div class="palette" id="palette"></div>
-            <button id="btnCheck">Проверить</button>
-          </div>
-
-          <div class="hints">
-            <span class="kbd">Клик по области</span> — выделить (без
-            перекраски).<br />
-            <span class="kbd">Shift+клик</span> — добавить/убрать область в
-            выделение.<br />
-            Клик по цвету в палитре — перекрасить выделенные области.<br />
-            <span class="kbd">ESC</span> — снять выделение;
-            <span class="kbd">Колёсико+Ctrl</span> — зум; перетаскивание —
-            пан.<br />
-            <span class="kbd">Проверить</span> — области подсвечиваются
-            свечением (зелёным/красным).
-          </div>
-        </div>
-      </aside>
     </div>
 
-    <script src="https://unpkg.com/@panzoom/panzoom@4.6.0/dist/panzoom.min.js"></script>
+    <aside class="side">
+      <div class="panel">
+        <h3 style="margin:0 0 6px">Раскраска карты</h3>
+        <div class="status">Выбранный цвет: <span id="curColorName">white</span> · Выделено: <span
+            id="selCount">0</span></div>
+        <div class="row">
+          <div class="palette" id="palette"></div>
+          <button id="btnCheck">Проверить</button>
+        </div>
 
-    <script type="application/json" id="mapConfig">
-      {
-        "meta": { "width": 750, "height": 641 },
-        "image": { "dataURL": "", "name": "map.png" },
-        "areas": []
-      }
-    </script>
-    <script src="./map.js" defer></script>
-  </body>
+        <div class="hints">
+          <span class="kbd">Клик по области</span> — выделить (без перекраски).<br />
+          <span class="kbd">Shift+клик</span> — добавить/убрать область в выделение.<br />
+          Клик по цвету в палитре — перекрасить выделенные области.<br />
+          <span class="kbd">ESC</span> — снять выделение; <span class="kbd">Колёсико+Ctrl</span> — зум; перетаскивание —
+          пан.<br />
+          <span class="kbd">Проверить</span> — области подсвечиваются свечением (зелёным/красным).
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script src="https://unpkg.com/@panzoom/panzoom@4.6.0/dist/panzoom.min.js"></script>
+
+  <script type="application/json" id="mapConfig">
+{
+  "meta": { "width": 750, "height": 641 },
+  "image": { "dataURL": "", "name": "map.png" },
+  "areas": []
+}
+  </script>
+  <script src="./map.js" defer></script>
+</body>
+
 </html>
